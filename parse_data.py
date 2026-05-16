@@ -60,10 +60,14 @@ street_replacement = {
     " " : ""
 }
 
+import subprocess
+
 print("Downloading GMRS ZIP from FCC")
-urllib.request.urlretrieve(gmrs_URL, gmrs_ZIP)
-print("Downloading amateur ZIP from FCC")
-urllib.request.urlretrieve(amat_URL, amat_ZIP)
+subprocess.run(["curl", "-L", "-o", gmrs_ZIP, gmrs_URL], check=True)
+
+print("Downloading Amateur ZIP from FCC")
+subprocess.run(["curl", "-L", "-o", amat_ZIP, amat_URL], check=True)
+
 
 print("Extracting GMRS files from ZIP")
 with zipfile.ZipFile(gmrs_ZIP, 'r') as zip_ref:
